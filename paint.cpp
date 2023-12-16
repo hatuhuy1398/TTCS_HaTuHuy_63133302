@@ -6,7 +6,6 @@ using namespace std;
 
 int scale = 1;
 int curColor = 0;
-//khai bao ellipse
 void putpixelEllipse(const int &x0, const int &y0, const int &x, const int &y)
 {
   bar(x0+x, y0+y, x0+x+scale, y0+y+scale);
@@ -14,7 +13,6 @@ void putpixelEllipse(const int &x0, const int &y0, const int &x, const int &y)
   bar(x0-x, y0-y, x0-x+scale, y0-y+scale);
   bar(x0-x, y0+y, x0-x+scale, y0+y+scale);
 }
-//ve hinh ellipse
 void drawEllipse(int x0, int y0, int rx, int ry) {
   int x = 0, y = ry;
   int dy = 2*ry*ry*x;
@@ -47,7 +45,6 @@ void drawEllipse(int x0, int y0, int rx, int ry) {
     putpixelEllipse(x0, y0, x, y);
   }
 }
-//khai bao hinh tron
 void putpixelCircle(const &cx, const &cy, const int &x, const int &y)
 {
   bar(cx + x, cy + y, cx + x + scale, cy + y + scale);
@@ -59,9 +56,7 @@ void putpixelCircle(const &cx, const &cy, const int &x, const int &y)
   bar(cx - y, cy + x, cx - y + scale, cy + x + scale);
   bar(cx - x, cy + y, cx - x + scale, cy + y + scale);
 }
-//ham ve hinh tron
 void drawCircle(const int &cx, const int &cy, const int &r) 
-//tat ca nhan cho 4 theo cong thuc
 {
   int p = 1.25 - r;
   int x = 0, y = r;
@@ -143,7 +138,6 @@ struct paint
     }
     return ".";
   }
-  ///ve hinh
   void intersection(const int &x1, const int &y1, int &x2, int &y2)
   {
       int a = (y2 - y1), b = (x1 - x2), c = x2*y1-y2*x1;
@@ -216,7 +210,6 @@ struct paint
     drawLine(x2, y1, x2, y2);
     drawLine(x1, y2, x2, y2);
   }
-  ///Tuy chon cong  cu &kich thuoc & hinh dạng & mau sac
   int xSta = 0, ySta = 0;
   void drawSelectedSatus(int x, int y)
   {
@@ -250,7 +243,6 @@ struct paint
     x /= 40, y /= 40; x -= 2;
     return y*2+x+1;
   }
-  /// ve hinh dang 
   void drawPencilIcon()
   {
     DX = DY = 0;
@@ -315,7 +307,6 @@ struct paint
         bared(x+3,y+3,x+38,y+38);
       }
   }
-    ///ve tron vuong ellipse tamgiac
   void drawLineIcon()
   {
     DX = 4 * 40, DY = 0;
