@@ -56,7 +56,7 @@ void putpixelCircle(const &cx, const &cy, const int &x, const int &y)
   bar(cx - y, cy + x, cx - y + scale, cy + x + scale);
   bar(cx - x, cy + y, cx - x + scale, cy + y + scale);
 }
-void drawCircle(const int &cx, const int &cy, const int &r) 
+void drawCircle(const int &cx, const int &cy, const int &r)
 {
   int p = 1.25 - r;
   int x = 0, y = r;
@@ -132,6 +132,8 @@ struct paint
       case 7: return "polygon";
       case 20: return "ellipse";
       case 21: return "rectangle";
+      case 22: return "righttriangle";
+      case 23: return "star";
       case 16: return "color_picker";
       case 17: return "clear";
       default: return ".";
@@ -210,7 +212,23 @@ struct paint
     drawLine(x2, y1, x2, y2);
     drawLine(x1, y2, x2, y2);
   }
-  int xSta = 0, ySta = 0;
+  void drawRightTriangleMouse(int x1, int y1)
+  {
+    int x2, y2; getmouseclickleft1(x1, y1, x2, y2);
+    if(x1 > x2) swap(x1, x2); if(y1 > y2) swap(y1, y2);
+    y1 = max(y1, 81);
+    y2 = min(y2, 480-scale);
+    x2 = min(x2, 640-scale);
+    drawLine(x1, y1, x1, y2);
+    drawLine(x1, y2, x2, y2);
+    drawLine(x1, y1, x2, y2);
+  }
+  void drawStarMouse(int x1 =240, int y1=40){
+
+
+  }
+  int xSta = 0;
+  int ySta = 0;
   void drawSelectedSatus(int x, int y)
   {
     x /= 40;
@@ -338,13 +356,23 @@ struct paint
     DX = 4 * 40, DY = 40;
     drawEllipse(20+DX, 20+DY, 15, 10);
   }
-  drawRectangleIcon()
+   drawRectangleIcon()
   {
     DX = 5*40, DY = 40;
     drawLine(5+DX, 10+DY, 35+DX, 10+DY);
     drawLine(5+DX, 30+DY, 35+DX, 30+DY);
     drawLine(5+DX, 10+DY, 5+DX, 30+DY);
     drawLine(35+DX, 10+DY, 35+DX, 30+DY);
+  }
+  void drawRightTriangleIcon(){
+    DX = 6 * 40, DY = 40;
+    lined(5, 10, 35, 30);
+    lined(5, 30, 35, 30);
+    lined(5, 10, 5, 30);
+
+  }
+  void drawStarIcon(){
+    DX = 7 * 40, DY = 40;
   }
   void drawIcon()
   {
@@ -360,6 +388,8 @@ struct paint
     drawPolygonIcon();
     drawEllipseIcon();
     drawRectangleIcon();
+    drawRightTriangleIcon();
+    drawStarIcon();
   }
   void initalizate()
   {
@@ -454,6 +484,8 @@ struct paint
             else if(currentStatus == "square") drawSquareMouse(x, y);
             else if(currentStatus == "polygon") drawPolygonMouse(x, y);
             else if(currentStatus == "rectangle") drawRectangleMouse(x, y);
+            else if(currentStatus == "righttriangle") drawRightTriangleMouse(x, y);
+            else if(currentStatus == "star") drawStarMouse(x,y);
             else if(currentStatus == "ellipse") drawEllipseMouse(x, y);
           }
         }
